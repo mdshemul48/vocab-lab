@@ -1,3 +1,4 @@
+import { connectDB } from './config/connectDB';
 import dotenv from 'dotenv';
 import express from 'express';
 
@@ -8,6 +9,12 @@ app.get('/', async (req, res) => {
   res.send('hello world');
 });
 
-app.listen(3000, () => {
-  console.log('App listening on port http://localhost:3000');
-});
+connectDB()
+  .then(() => {
+    app.listen(5000, () => {
+      console.log('App listening on port http://localhost:5000');
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
