@@ -11,4 +11,7 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.eslint.json',
   },
+  rules: {
+    'import/no-extraneous-dependencies': 0,
+  },
 };

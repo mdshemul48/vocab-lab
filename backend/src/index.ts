@@ -1,12 +1,14 @@
+import dotenv from 'dotenv';
 import express from 'express';
+import { generateWordInfo } from './utility/generateWordInfo';
+
+dotenv.config();
 const app = express();
-const getYear = (date: Date): string => {
-  return `${date.getFullYear()}`;
-};
-app.get('/', (req, res) => {
-  const year = getYear(new Date());
-  res.send(`Hello World ! ${year}`);
+
+app.get('/', async (req, res) => {
+  const word = await generateWordInfo('beautiful');
+  return res.json(word);
 });
 app.listen(3000, () => {
-  console.log('App listening on port 3000!');
+  console.log('App listening on port http://localhost:3000');
 });
