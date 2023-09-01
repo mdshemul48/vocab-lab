@@ -5,10 +5,6 @@ import express from 'express';
 dotenv.config();
 const app = express();
 
-app.get('/', async (req, res) => {
-  res.send('hello world');
-});
-
 connectDB()
   .then(() => {
     app.listen(5000, () => {
