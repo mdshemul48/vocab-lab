@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import VocabulariesModel from '../models/Vocabularies.model';
 import { generateWordInfo } from '../utility/generateWordInfo';
-import { GenerateWordInfo } from 'types/shared.types';
+import { WordInfo } from 'types/shared.types';
 export default class VocabulariesController {
   static async getWordInfos(req: Request, res: Response) {
     const { word } = req.query;
@@ -37,7 +37,7 @@ export default class VocabulariesController {
     try {
       const wordMeaning = await generateWordInfo(word?.toString());
 
-      const createdVocab: GenerateWordInfo =
+      const createdVocab: WordInfo =
         await VocabulariesModel.create(wordMeaning);
 
       return res.status(201).json({

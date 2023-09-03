@@ -1,4 +1,4 @@
-import { GenerateWordInfo } from 'types/shared.types';
+import { WordInfo } from 'types/shared.types';
 import { openAiConfig } from '../config/openAiConfig';
 
 const otherConfig = {
@@ -15,17 +15,15 @@ you will help user with learn new vocabulary.
 you will give him a json response. 
 the response will be like this.
 {
-"word": "the word that user gave",
-"meaning_bangla": ["translate the word meaning to bangla"],
-"sentence_examples": ["english example sentence with that word(bangla of this sample)"],
-"pronounce": "the word pronounce", 
-"alternative_words": ["you will give some alternative words"]
+  word: string;
+  meaning_bangla: string[];
+  sentence_examples: { english: string; bangla: string }[];
+  pronounce: string;
+  alternative_words: string[];
 }
 `;
 
-export const generateWordInfo = async (
-  word: string
-): Promise<GenerateWordInfo> => {
+export const generateWordInfo = async (word: string): Promise<WordInfo> => {
   try {
     const response = await openAiConfig.chat.completions.create({
       ...otherConfig,

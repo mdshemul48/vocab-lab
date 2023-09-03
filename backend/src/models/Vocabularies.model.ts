@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import { GenerateWordInfo } from 'types/shared.types';
-const VocabulariesSchema = new Schema<GenerateWordInfo>(
+import { WordInfo } from 'types/shared.types';
+const VocabulariesSchema = new Schema<WordInfo>(
   {
     word: {
       type: String,
@@ -8,7 +8,12 @@ const VocabulariesSchema = new Schema<GenerateWordInfo>(
       required: true,
     },
     meaning_bangla: [String],
-    sentence_examples: [String],
+    sentence_examples: [
+      {
+        english: String,
+        bangla: String,
+      },
+    ],
     pronounce: String,
     alternative_words: [String],
   },
