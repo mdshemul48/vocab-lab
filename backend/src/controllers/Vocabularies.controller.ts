@@ -5,10 +5,15 @@ import { GenerateWordInfo } from 'types/shared.types';
 export default class VocabulariesController {
   static async getWordInfos(req: Request, res: Response) {
     const { word } = req.query;
-    if (!word) {
-      const vocabularies = await VocabulariesModel.find();
-      return res.status(200).json(vocabularies);
+    if (word) {
+      const vocab = await VocabulariesModel.find({
+        word: { $regex: word, $options: 'i' },
+      });
+      return res.status(200).json(vocab);
     }
+
+    const allVocab = await VocabulariesModel.find();
+    return res.status(200).json(allVocab);
   }
 
   static async getWordFromGPTAndSave(req: Request, res: Response) {

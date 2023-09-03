@@ -14,6 +14,8 @@ const VocabulariesSchema = new Schema<GenerateWordInfo>(
   },
   { timestamps: true }
 );
+
+VocabulariesSchema.index({ word: 'text' });
 const VocabulariesModel = mongoose.model('Vocabularies', VocabulariesSchema);
 
 export default VocabulariesModel;
