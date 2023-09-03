@@ -1,3 +1,4 @@
+import { GenerateWordInfo } from 'types/shared.types';
 import { openAiConfig } from '../config/openAiConfig';
 
 const otherConfig = {
@@ -21,14 +22,6 @@ the response will be like this.
 "alternative_words": ["you will give some alternative words"]
 }
 `;
-
-type GenerateWordInfo = {
-  word: string;
-  meaning_bangla: string[];
-  sentence_examples: string[];
-  pronounce: string;
-  alternative_words: string[];
-};
 
 export const generateWordInfo = async (
   word: string

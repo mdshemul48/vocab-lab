@@ -1,9 +1,12 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import { connectDB } from './config/connectDB';
+import vocabulariesRoute from './routes/vocabularies.routes';
 
 dotenv.config();
 const app = express();
+
+app.use('/vocabularies', vocabulariesRoute);
 
 connectDB()
   .then(() => {

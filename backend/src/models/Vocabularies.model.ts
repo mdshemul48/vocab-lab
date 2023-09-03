@@ -1,6 +1,6 @@
-import { Model, Schema } from 'mongoose';
-
-const VocabulariesSchema = new Schema(
+import mongoose, { Schema } from 'mongoose';
+import { GenerateWordInfo } from 'types/shared.types';
+const VocabulariesSchema = new Schema<GenerateWordInfo>(
   {
     word: {
       type: String,
@@ -14,6 +14,6 @@ const VocabulariesSchema = new Schema(
   },
   { timestamps: true }
 );
-const VocabulariesModel = new Model('Vocabularies', VocabulariesSchema);
+const VocabulariesModel = mongoose.model('Vocabularies', VocabulariesSchema);
 
 export default VocabulariesModel;
