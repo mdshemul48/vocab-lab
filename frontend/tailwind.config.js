@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
+        anek: ['Anek Bangla', 'sans-serif'],
       },
     },
   },
