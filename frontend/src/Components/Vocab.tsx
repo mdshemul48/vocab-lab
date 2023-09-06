@@ -5,22 +5,24 @@ import { FiBook } from 'react-icons/fi';
 import { SentenceExample, WordInfo } from '../types/shared.types';
 import useSelectLan from '../hooks/useSelectLan';
 
-function WordSentence({ sentenceInfo }: { sentenceInfo: SentenceExample }) {
+function WordSentence({ sentenceInfo: { bangla, english } }: { sentenceInfo: SentenceExample }) {
   const { isBangla } = useSelectLan();
+
   return (
-    <p
-      className={`mt-3 text-lg ${
-        isBangla ? 'font-anek' : 'font-poppins'
-      } text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg shadow-sm`}
-    >
-      {isBangla ? sentenceInfo.bangla : sentenceInfo.english}
-    </p>
+    <div className="text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg mt-3 shadow-sm">
+      <p className={`text-xl ${isBangla ? 'font-anek' : 'font-poppins'} font-bold`}>
+        {isBangla ? bangla : english}
+      </p>{' '}
+      <span className={`block text-sm ${!isBangla ? 'font-anek' : 'font-poppins'}`}>
+        {!isBangla ? bangla : english}
+      </span>
+    </div>
   );
 }
 
 export default function Vocab({ vocab }: { vocab: WordInfo }) {
   return (
-    <div className="shadow rounded-lg border border-spacing-1 border-gray-300 p-2 mt-3">
+    <div className="shadow-sm rounded-lg border border-gray-300 p-2 mt-4">
       <div className="flex items-center justify-between">
         {' '}
         <h3 className="text-xl font-poppins capitalize font-bold text-slate-600">
