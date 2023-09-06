@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import { LuLanguages } from 'react-icons/lu';
 import { FiBook } from 'react-icons/fi';
 import { SentenceExample, WordInfo } from '../types/shared.types';
@@ -19,7 +20,9 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
         <h3 className="text-xl font-poppins capitalize font-bold text-slate-600">
           {vocab.word} <span className="font-anek">({vocab.pronounce})</span>
         </h3>
-        <h2 className="font-poppins capitalize text-slate-600">Tuesday, September 5, 2023</h2>
+        <h2 className="font-poppins capitalize text-slate-600">
+          {moment(vocab.createdAt).format('MMMM Do YYYY, h:mm:ss A')}
+        </h2>
       </div>
 
       <div>

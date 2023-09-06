@@ -7,5 +7,5 @@ export interface WordInfo {
   sentence_examples: SentenceExample[];
   pronounce: string;
   alternative_words: string[];
-  createdAt: Date;
+  createdAt: string;
 }
