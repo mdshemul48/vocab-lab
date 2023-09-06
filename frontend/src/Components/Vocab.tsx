@@ -3,11 +3,17 @@ import moment from 'moment';
 import { LuLanguages } from 'react-icons/lu';
 import { FiBook } from 'react-icons/fi';
 import { SentenceExample, WordInfo } from '../types/shared.types';
+import useSelectLan from '../hooks/useSelectLan';
 
 function WordSentence({ sentenceInfo }: { sentenceInfo: SentenceExample }) {
+  const { isBangla } = useSelectLan();
   return (
-    <p className="mt-3 text-lg font-anek text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg shadow-sm">
-      {sentenceInfo.bangla}
+    <p
+      className={`mt-3 text-lg ${
+        isBangla ? 'font-anek' : 'font-poppins'
+      } text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg shadow-sm`}
+    >
+      {isBangla ? sentenceInfo.bangla : sentenceInfo.english}
     </p>
   );
 }
@@ -21,7 +27,7 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
           {vocab.word} <span className="font-anek">({vocab.pronounce})</span>
         </h3>
         <h2 className="font-poppins capitalize text-slate-600">
-          {moment(vocab.createdAt).format('MMMM Do YYYY, h:mm:ss A')}
+          {moment(vocab.createdAt).format('MMMM Do YYYY, h:mm A')}
         </h2>
       </div>
 
@@ -31,7 +37,8 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
           <LuLanguages className="me-2" /> {vocab.meaning_bangla.join(', ')}
         </p>
         <p className="flex items-center text-slate-600 font-anek text-lg">
-          <FiBook className="me-2" /> {vocab.alternative_words.map((word) => _.upperFirst(word)).join(', ')}
+          <FiBook className="me-2" />{' '}
+          {vocab.alternative_words.map((word) => _.upperFirst(word)).join(', ')}
         </p>
       </div>
 
