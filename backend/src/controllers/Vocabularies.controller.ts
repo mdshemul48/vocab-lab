@@ -4,7 +4,14 @@ import { generateWordInfo } from '../utility/generateWordInfo';
 import { WordInfo } from 'types/shared.types';
 export default class VocabulariesController {
   static async getWordInfos(req: Request, res: Response) {
-    const { word } = req.query;
+    type RequestType = {
+      word: undefined | string;
+      page: undefined | string;
+      limit: undefined | string;
+    };
+
+    const { word, page, limit } = <RequestType>req.query;
+
     if (word) {
       const vocab = await VocabulariesModel.find({
         word: { $regex: word, $options: 'i' },
@@ -12,7 +19,15 @@ export default class VocabulariesController {
       return res.status(200).json(vocab);
     }
 
-    const allVocab = await VocabulariesModel.find();
+    const pageInt = page ? parseInt(page) : 0;
+    const limitInt = limit ? parseInt(limit) : 10;
+
+    const allVocab = await VocabulariesModel.find()
+      .sort({ createdAt: 'desc' })
+      .skip((pageInt !== 0 ? pageInt - 1 : 0) * limitInt)
+      .limit(limitInt)
+      .exec();
+
     return res.status(200).json(allVocab);
   }
 
