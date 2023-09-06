@@ -35,5 +35,6 @@ module.exports = {
     'import/extensions': 0,
     'react/jsx-one-expression-per-line': 0,
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
+    'object-curly-newline': 'off',
   },
 };
