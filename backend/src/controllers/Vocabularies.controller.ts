@@ -55,9 +55,7 @@ export default class VocabulariesController {
       const createdVocab: WordInfo =
         await VocabulariesModel.create(wordMeaning);
 
-      return res.status(201).json({
-        data: createdVocab,
-      });
+      return res.status(201).json(createdVocab);
     } catch (error) {
       return res.status(400).json({
         message: 'Getting info from GPT failed.',
