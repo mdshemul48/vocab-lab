@@ -18,7 +18,7 @@ the response will be like this.
   word: string;
   meaning_bangla: string[];
   sentence_examples: { english: string; bangla: string }[];
-  pronounce: string;
+  pronounce: string; // American pronunciation
   alternative_words: string[];
 }
 `;

@@ -21,6 +21,8 @@ export default class VocabulariesController {
 
     const pageInt = page ? parseInt(page) : 0;
     const limitInt = limit ? parseInt(limit) : 10;
+    const totalVocabs = await VocabulariesModel.countDocuments({});
+    const totalPage = Math.floor(totalVocabs / limitInt);
 
     const allVocab = await VocabulariesModel.find()
       .sort({ createdAt: 'desc' })
@@ -28,7 +30,14 @@ export default class VocabulariesController {
       .limit(limitInt)
       .exec();
 
-    return res.status(200).json(allVocab);
+    return res.status(200).json({
+      collection: allVocab,
+      pagination: {
+        totalPage: totalPage,
+        currentPage: pageInt,
+        limit: limitInt,
+      },
+    });
   }
 
   static async getWordFromGPTAndSave(req: Request, res: Response) {
