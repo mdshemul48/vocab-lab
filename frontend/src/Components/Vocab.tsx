@@ -25,7 +25,7 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
     <div className="shadow-sm rounded-lg border border-gray-300 p-2 mt-4">
       <div className="flex items-center justify-between">
         {' '}
-        <h3 className="text-xl font-poppins capitalize font-bold text-slate-600">
+        <h3 className="text-2xl font-poppins capitalize font-bold text-slate-600">
           {vocab.word} <span className="font-anek">({vocab.pronounce})</span>
         </h3>
         <h2 className="font-poppins capitalize text-slate-600">

@@ -21,32 +21,59 @@ export default function VocabsContextProvider({ children }: { children: React.Re
   const [searchWord, setSearchWord] = useState('');
   const [gptLoading, setGptLoading] = useState(false);
 
+  const [selectedPage, setSelectedPage] = useState(1);
+  const [pagination, setPagination] = useState<{
+    totalPage: number;
+    currentPage: number;
+    limit: number;
+  } | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axiosInstance.get<WordInfo[]>(
-          `/vocabularies?page=1&word=${searchWord}`,
-        );
-        setVocabs(data);
+        const params = {
+          word: searchWord.length > 0 ? searchWord : null,
+          page: selectedPage,
+        };
+        const { data } = await axiosInstance.get<{
+          collection: WordInfo[];
+          pagination?: { totalPage: number; currentPage: number; limit: number };
+        }>('/vocabularies', {
+          params,
+        });
+
+        setVocabs((PrevData) => [...PrevData, ...data.collection]);
+        setPagination(data.pagination!);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  }, [searchWord]);
+  }, [searchWord, selectedPage]);
 
   const createNewWordInDbHandler = useCallback(async () => {
     setGptLoading(true);
-    const { data } = await axiosInstance.post<WordInfo>(
-      `/vocabularies/get-word-meaning-from-gpt?word=${searchWord}`,
-    );
+
+    const params = {
+      word: searchWord.length > 0 && searchWord,
+    };
+    const { data } = await axiosInstance.post<WordInfo>('/vocabularies/get-word-meaning-from-gpt', {
+      params,
+    });
     setVocabs((prevVal) => [data, ...prevVal]);
     setGptLoading(false);
   }, [searchWord]);
 
   const values = useMemo(
-    () => ({ vocabs, setSearchWord, createNewWordInDbHandler, gptLoading }),
-    [createNewWordInDbHandler, vocabs, gptLoading],
+    () => ({
+      vocabs,
+      setSearchWord,
+      createNewWordInDbHandler,
+      gptLoading,
+      pagination,
+      setSelectedPage,
+    }),
+    [vocabs, createNewWordInDbHandler, gptLoading, pagination],
   );
 
   return <VocabsContext.Provider value={values}>{children}</VocabsContext.Provider>;
