@@ -16,6 +16,7 @@ you will give him a json response.
 the response will be like this.
 {
   word: string;
+  meaning: string[],
   meaning_bangla: string[];
   sentence_examples: { english: string; bangla: string }[];
   pronounce: string; // American pronunciation

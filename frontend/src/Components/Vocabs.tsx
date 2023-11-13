@@ -4,7 +4,7 @@ import Vocab from './Vocab';
 import useVocabs from '../hooks/useVocabs';
 
 function Vocabs() {
-  const { vocabs, setSelectedPage, pagination } = useVocabs();
+  const { vocabs, setSelectedPage, pagination} = useVocabs();
 
   return (
     <section className="mt-5">
