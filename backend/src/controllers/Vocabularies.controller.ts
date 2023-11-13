@@ -43,7 +43,7 @@ export default class VocabulariesController {
   static async getWordFromGPTAndSave(req: Request, res: Response) {
     const { word } = req.query;
 
-    if (!word || word?.length == 0) {
+    if (!word || word?.length === 0) {
       return res.status(400).json({
         message: 'You must provide a word.',
       });
