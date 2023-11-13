@@ -7,6 +7,7 @@ const VocabulariesSchema = new Schema<WordInfo>(
       unique: true,
       required: true,
     },
+    meanings: [String],
     meaning_bangla: [String],
     sentence_examples: [
       {

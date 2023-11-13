@@ -28,7 +28,7 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
         <h3 className="text-2xl font-poppins capitalize font-bold text-slate-600">
           {vocab.word} <span className="font-anek">({vocab.pronounce})</span>
         </h3>
-        <h2 className="font-poppins capitalize text-slate-600">
+        <h2 className="font-poppins capitalize text-slate-600 hidden md:block">
           {moment(vocab.createdAt).format('MMMM Do YYYY, h:mm A')}
         </h2>
       </div>
@@ -42,6 +42,14 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
           <FiBook className="me-2" />{' '}
           {vocab.alternative_words.map((word) => _.upperFirst(word)).join(', ')}
         </p>
+      </div>
+
+      <div>
+        {vocab.meanings.map(meaning=>  <div className="text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg mt-3 shadow-sm">
+      <p className={`text-lg font-poppins font-bold`}>
+        {meaning}
+      </p>
+    </div>)}
       </div>
 
       <div>

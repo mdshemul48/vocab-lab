@@ -16,15 +16,15 @@ export default class VocabulariesController {
       const vocab = await VocabulariesModel.find({
         word: { $regex: word, $options: 'i' },
       });
-      return res.status(200).json(vocab);
+      return res.status(200).json({ collection: vocab });
     }
 
     const pageInt = page ? parseInt(page) : 0;
     const limitInt = limit ? parseInt(limit) : 10;
     const totalVocabs = await VocabulariesModel.countDocuments({});
-    const totalPage = Math.floor(totalVocabs / limitInt);
+    const totalPage = Math.ceil(totalVocabs / limitInt);
 
-    const allVocab = await VocabulariesModel.find()
+    const allVocab = await VocabulariesModel.find({})
       .sort({ createdAt: 'desc' })
       .skip((pageInt !== 0 ? pageInt - 1 : 0) * limitInt)
       .limit(limitInt)
@@ -41,7 +41,7 @@ export default class VocabulariesController {
   }
 
   static async getWordFromGPTAndSave(req: Request, res: Response) {
-    const { word } = req.query;
+    const { word } = req.body;
 
     if (!word || word?.length === 0) {
       return res.status(400).json({
