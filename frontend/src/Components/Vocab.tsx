@@ -28,7 +28,7 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
         <h3 className="text-2xl font-poppins capitalize font-bold text-slate-600">
           {vocab.word} <span className="font-anek">({vocab.pronounce})</span>
         </h3>
-        <h2 className="font-poppins capitalize text-slate-600">
+        <h2 className="font-poppins capitalize text-slate-600 hidden md:block">
           {moment(vocab.createdAt).format('MMMM Do YYYY, h:mm A')}
         </h2>
       </div>

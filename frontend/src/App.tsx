@@ -4,7 +4,7 @@ import Vocabs from './Components/Vocabs';
 
 function App() {
   return (
-    <div className="w-1/2 mx-auto mt-20">
+    <div className="px-3 mx-auto mt-20 sm:w-full md:w-5/6 lg:w-2/3 xl:w-1/2">
       <Heading />
       <div className="mt-5 w-full bg-slate-100 p-3 rounded">
         <SearchBox />
