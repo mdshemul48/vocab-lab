@@ -45,6 +45,14 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
       </div>
 
       <div>
+        {vocab.meanings.map(meaning=>  <div className="text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg mt-3 shadow-sm">
+      <p className={`text-lg font-poppins font-bold`}>
+        {meaning}
+      </p>
+    </div>)}
+      </div>
+
+      <div>
         {vocab.sentence_examples.map((sentenceInfo) => (
           <WordSentence sentenceInfo={sentenceInfo} key={sentenceInfo._id} />
         ))}

@@ -4,7 +4,7 @@ import { openAiConfig } from '../config/openAiConfig';
 const otherConfig = {
   model: 'gpt-3.5-turbo',
   temperature: 0,
-  max_tokens: 500,
+  max_tokens: 1000,
   top_p: 1,
   frequency_penalty: 0,
   presence_penalty: 0,
@@ -16,7 +16,7 @@ you will give him a json response.
 the response will be like this.
 {
   word: string;
-  meaning: string[],
+  meanings: string[],
   meaning_bangla: string[];
   sentence_examples: { english: string; bangla: string }[];
   pronounce: string; // American pronunciation
