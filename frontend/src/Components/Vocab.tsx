@@ -2,6 +2,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { LuLanguages } from 'react-icons/lu';
 import { FiBook } from 'react-icons/fi';
+import { SayButton } from 'react-say';
 import { SentenceExample, WordInfo } from '../types/shared.types';
 import useSelectLan from '../hooks/useSelectLan';
 
@@ -9,10 +10,13 @@ function WordSentence({ sentenceInfo: { bangla, english } }: { sentenceInfo: Sen
   const { isBangla } = useSelectLan();
 
   return (
-    <div className="text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg mt-3 shadow-sm">
-      <p className={`text-xl ${isBangla ? 'font-anek' : 'font-poppins'} font-bold`}>
-        {isBangla ? bangla : english}
-      </p>{' '}
+    <div className="text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg mt-3 shadow-sm text-left w-100">
+      <SayButton speak={english}>
+        <p className={`text-xl ${isBangla ? 'font-anek' : 'font-poppins'} font-bold`}>
+          {isBangla ? bangla : english}
+        </p>{' '}
+      </SayButton>
+
       <span className={`block text-sm ${!isBangla ? 'font-anek' : 'font-poppins'}`}>
         {!isBangla ? bangla : english}
       </span>
@@ -25,9 +29,11 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
     <div className="shadow-sm rounded-lg border border-gray-300 p-2 mt-4">
       <div className="flex items-center justify-between">
         {' '}
-        <h3 className="text-2xl font-poppins capitalize font-bold text-slate-600">
-          {vocab.word} <span className="font-anek">({vocab.pronounce})</span>
-        </h3>
+        <SayButton speak={vocab.word}>
+          <h3 className="text-2xl font-poppins capitalize font-bold text-slate-600 cursor-pointer">
+            {vocab.word} <span className="font-anek">({vocab.pronounce}) </span>
+          </h3>
+        </SayButton>
         <h2 className="font-poppins capitalize text-slate-600 hidden md:block">
           {moment(vocab.createdAt).format('MMMM Do YYYY, h:mm A')}
         </h2>
@@ -45,11 +51,16 @@ export default function Vocab({ vocab }: { vocab: WordInfo }) {
       </div>
 
       <div>
-        {vocab.meanings.map(meaning=>  <div className="text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg mt-3 shadow-sm">
-      <p className={`text-lg font-poppins font-bold`}>
-        {meaning}
-      </p>
-    </div>)}
+        {vocab.meanings.map((meaning) => (
+          <div
+            className="text-slate-600 p-2 border border-spacing-1 border-slate-300 rounded-lg mt-3 shadow-sm"
+            key={meaning}
+          >
+            <SayButton speak={meaning}>
+              <p className="text-lg font-poppins font-bold text-left">{meaning}</p>
+            </SayButton>
+          </div>
+        ))}
       </div>
 
       <div>
